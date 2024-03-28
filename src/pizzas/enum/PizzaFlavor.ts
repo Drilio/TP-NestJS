@@ -1,0 +1,1 @@
+export enum PizzaFlavor { Tomate = "T", Creme = "C" };

@@ -1,24 +1,22 @@
 import { Module } from '@nestjs/common';
-import { PizzasService } from './pizzas.service';
-import { PizzasController } from './pizzas.controller';
+import { CalzoneService } from './calzone.service';
+import { CalzoneController } from './calzone.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pizza } from './entities/pizza.entity';
+import { Recipe } from 'src/recipe/entities/recipe.entity';
 import { Ingredient } from 'src/ingredient/entities/ingredient.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { Story } from 'src/story/entities/story.entity';
-import { Calzone } from 'src/calzone/entities/calzone.entity';
-import { Recipe } from 'src/recipe/entities/recipe.entity';
+import { Calzone } from './entities/calzone.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([
     Recipe,
-    Pizza,
     Calzone,
     Ingredient,
     Review,
     Story,
   ])],
-  controllers: [PizzasController],
-  providers: [PizzasService],
+  controllers: [CalzoneController],
+  providers: [CalzoneService],
 })
-export class PizzasModule { }
+export class CalzoneModule { }

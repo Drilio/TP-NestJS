@@ -1,4 +1,4 @@
-import { Pizza } from "src/pizzas/entities/pizza.entity";
+import { Recipe } from "src/recipe/entities/recipe.entity";
 import { Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -7,9 +7,9 @@ export class Story {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @OneToOne(() => Pizza)
+    @OneToOne(() => Recipe)
     @JoinColumn()
-    pizza: Pizza;
+    recipe: Recipe;
 
     @Column({ length: 500 })
     anecdote!: string;

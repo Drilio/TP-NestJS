@@ -1,4 +1,4 @@
-import { Pizza } from "src/pizzas/entities/pizza.entity";
+import { Recipe } from "src/recipe/entities/recipe.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -9,6 +9,6 @@ export class Review {
     @Column({ length: 100 })
     name!: string;
 
-    @ManyToOne(() => Pizza, pizza => pizza.reviews)
-    pizza: Pizza;
+    @ManyToOne(() => Recipe, recipe => recipe.reviews)
+    recipe: Recipe;
 }

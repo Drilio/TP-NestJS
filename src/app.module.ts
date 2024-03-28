@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { IngredientModule } from './ingredient/ingredient.module';
 import { ReviewModule } from './review/review.module';
 import { StoryModule } from './story/story.module';
+import { RecipeModule } from './recipe/recipe.module';
+import { CalzoneModule } from './calzone/calzone.module';
 
 @Module({
   imports: [
@@ -26,7 +28,9 @@ import { StoryModule } from './story/story.module';
     PizzasModule,
     IngredientModule,
     ReviewModule,
-    StoryModule],
+    StoryModule,
+    RecipeModule,
+    CalzoneModule],
   controllers: [AppController],
   providers: [AppService],
 })

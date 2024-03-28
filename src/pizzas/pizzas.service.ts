@@ -3,12 +3,29 @@ import { CreatePizzaDto } from './dto/create-pizza.dto';
 import { UpdatePizzaDto } from './dto/update-pizza.dto';
 import { Pizza } from './entities/pizza.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, QueryFailedError, Repository, TypeORMError } from 'typeorm';
+import { DataSource, DeleteResult, QueryFailedError, Repository, TypeORMError } from 'typeorm';
 
 @Injectable()
 export class PizzasService {
 
-  constructor(@InjectRepository(Pizza) private data: Repository<Pizza>) { }
+  constructor(@InjectRepository(Pizza) private data: Repository<Pizza>, private dataSource: DataSource) { }
+
+  async createMany(pizzas: Pizza[]) {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      for (let pizza of pizzas) {
+        await queryRunner.manager.save(pizza)
+      }
+      await queryRunner.commitTransaction();
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
 
   async create(dto: CreatePizzaDto): Promise<Pizza> {
     try {

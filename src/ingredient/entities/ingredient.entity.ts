@@ -9,6 +9,8 @@ export class Ingredient {
     @Column({ length: 100 })
     name!: string;
 
-    @ManyToMany(() => Recipe)
+    @ManyToMany(() => Recipe, {
+        cascade: true,
+    })
     recipe: Recipe[]
 }
